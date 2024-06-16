@@ -1,0 +1,227 @@
+Building configuration...
+
+Current configuration : 4900 bytes
+!
+! Last configuration change at 17:30:01 UTC Sun Jun 16 2024
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname Stijn-SW1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+enable secret 5 $1$VL6j$G52kfZc1OrHI2MPG1VP3S.
+!
+username admin privilege 15 secret 5 $1$Vc68$jCMwJ3ww1Jz8upDEe0nXI1
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+ip domain-name netacad.pka
+ip cef
+login block-for 300 attempts 3 within 60
+no ipv6 cef
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 20,30,40,50,60,70,99,999
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 20,30,40,50,60,70,99,999
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 20,30,40,50,60,70,99,999
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+interface Ethernet0/3
+ description Wordt gebruikt voor Ansible
+!
+interface Ethernet1/0
+ switchport trunk allowed vlan 20,30,40,50,60,70,99,999
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+interface Ethernet1/1
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/2
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/3
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet2/0
+ switchport access vlan 60
+ switchport trunk allowed vlan 20,30,40,50,60,70,99,999
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+interface Ethernet2/1
+ switchport access vlan 60
+ switchport trunk allowed vlan 20,30,40,50,60,70,99,999
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 999
+ switchport mode trunk
+!
+interface Ethernet2/2
+ shutdown
+!
+interface Ethernet2/3
+ shutdown
+!
+interface Ethernet3/0
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet3/1
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet3/2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet3/3
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet4/0
+ switchport access vlan 30
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet4/1
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet4/2
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet4/3
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet5/0
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet5/1
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet5/2
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet5/3
+ shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Vlan1
+ ip address 192.168.83.241 255.255.255.0
+!
+interface Vlan99
+ ip address 10.10.99.201 255.255.255.0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+snmp-server community MySecureCommunity RO
+snmp-server host 10.10.99.10 version 2c MySecureCommunity 
+!
+control-plane
+!
+banner motd ^C
+ _____              _      _  _                     _____  _                     ___                   
+/  ___|            | |    (_)| |                   /  __ \| |                   |_  |                  
+\ `--.  _   _  ___ | |__   _ | |__    __ _  _ __   | /  \/| |__    ___  ____      | |  ___   ___   ___ 
+ `--. \| | | |/ __|| '_ \ | || '_ \  / _` || '__|  | |    | '_ \  / _ \|_  /      | | / _ \ / __| / _ \
+/\__/ /| |_| |\__ \| | | || || |_) || (_| || |     | \__/\| | | ||  __/ / /   /\__/ /| (_) |\__ \|  __/
+\____/  \__,_||___/|_| |_||_||_.__/  \__,_||_|      \____/|_| |_| \___|/___|  \____/  \___/ |___/ \___|
+_______________________________________________________________________________________________________
+
+                                         Authorized Users Only!                                        
+_______________________________________________________________________________________________________
+^C
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end
